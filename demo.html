@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>滑动拼图验证码</title>
+  <link rel="stylesheet" href="./src/jigsaw.css">
+  <style>
+    .container {
+      width: 380px;
+      margin: 100px auto;
+    }
+    .container button {
+      width: 380px;
+      height: 40px;
+      background-color: #ffffff;
+      border: none;
+      border: 1px solid #cccccc;
+    }
+    input {
+      display: block;
+      width: 358px;
+      line-height: 40px;
+      margin: 10px 0;
+      padding: 0 10px;
+      outline: none;
+      border:1px solid #c8cccf;
+      border-radius: 4px;
+      color:#6a6f77;
+    }
+    #msg {
+      width: 100%;
+      line-height: 40px;
+      font-size: 14px;
+      text-align: center;
+    }
+    a:link,a:visited,a:hover,a:active {
+      margin-left: 100px;
+      color: #0366D6;
+    }
+
+  </style>
+</head>
+<body>
+<h3><a href="https://github.com/yeild/jigsaw">返回GitHub</a></h3>
+<div class="container">
+  <input value="admin" readonly/>
+  <input type="password" value="1234567890" readonly/>
+  <div id="captcha-box" class="captcha-box">
+    <div class="captcha-tit">完成拼图验证</div>
+    <div id="afresh" class="captcha-afresh">换一张</div>
+    <div id="close" class="captcha-close">X</div>
+    <div id="captcha"></div>
+  </div>
+  <div id="msg"></div>
+  <button id="btn">点击验证</button>
+  
+</div>
+<script src="./dist/jigsaw.min.js"></script>
+<!-- <script>
+if (!window.vTree) {
+  document.write('<script src="./dist/jigsaw.min.js"><\/script>')
+}
+</script> -->
+<script>
+  var myJigsaw = jigsaw.init({
+    el: document.getElementById('captcha'),
+    onSuccess: function() {
+      setTimeout(function() {
+        document.getElementById('captcha-box').style.display = 'none'
+      }, 400);
+    }
+  })
+  console.log(myJigsaw)
+  myJigsaw.init()
+  document.getElementById('btn').onclick = function () {
+    myJigsaw.reset()
+    document.getElementById('captcha-box').style.display = ''
+  }
+  document.getElementById('afresh').onclick = function () {
+    myJigsaw.reset()
+  }
+
+  var imgdom = new Image();
+  imgdom.src = './img/1.png'
+  console.log(imgdom)
+</script>
+</body>
+</html>
